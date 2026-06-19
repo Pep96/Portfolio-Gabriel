@@ -33,6 +33,13 @@ jobs:
       - name: Copy sub-apps
         run: cp -r web/apps build/web/apps
 
+      - name: Replace service worker with passthrough
+        run: |
+          cat > build/web/flutter_service_worker.js << 'EOF'
+          self.addEventListener('install', () => self.skipWaiting());
+          self.addEventListener('activate', () => clients.claim());
+          EOF
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
