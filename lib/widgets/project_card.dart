@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../constants/colors.dart';
 import '../utils/project_utils.dart';
+import 'project_preview_dialog.dart';
 
 class ProjectCardWidget extends StatelessWidget {
   const ProjectCardWidget({super.key, required this.project});
   final ProjectUtils project;
 
-  void _open(String? url) async {
+  void _openWeb(BuildContext context) {
+    final url = project.previewUrl ?? project.webLink;
     if (url == null) return;
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) launchUrl(uri);
+    ProjectPreviewDialog.show(context, project.title, url);
   }
 
   @override
@@ -73,24 +73,11 @@ class ProjectCardWidget extends StatelessWidget {
                   style: TextStyle(color: CustomColor.yellowSecondary, fontSize: 10),
                 ),
                 const Spacer(),
-                if (project.iosLink != null)
-                  InkWell(
-                    onTap: () => _open(project.iosLink),
-                    child: Image.asset("assets/ios_icon.png", width: 19),
-                  ),
-                if (project.androidLink != null)
+                if (project.webLink != null || project.previewUrl != null)
                   Padding(
                     padding: const EdgeInsets.only(left: 6),
                     child: InkWell(
-                      onTap: () => _open(project.androidLink),
-                      child: Image.asset("assets/android_icon.png", width: 17),
-                    ),
-                  ),
-                if (project.webLink != null)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6),
-                    child: InkWell(
-                      onTap: () => _open(project.webLink),
+                      onTap: () => _openWeb(context),
                       child: Image.asset("assets/web_icon.png", width: 17),
                     ),
                   ),
