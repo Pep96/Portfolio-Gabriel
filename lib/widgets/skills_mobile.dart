@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/colors.dart';
 import '../constants/skill_items.dart';
 
@@ -42,7 +43,9 @@ class SkillsMobile extends StatelessWidget {
                   ),
                   backgroundColor: CustomColor.bgLight2,
                   label: Text(skillItems[i]["title"]),
-                  avatar: Image.asset(skillItems[i]["img"]),
+                  avatar: skillItems[i]["svg"] == true
+                      ? SvgPicture.asset(skillItems[i]["img"], width: 24)
+                      : Image.asset(skillItems[i]["img"]),
                 ),
             ],
           ),

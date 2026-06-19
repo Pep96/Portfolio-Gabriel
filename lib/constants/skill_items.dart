@@ -6,12 +6,10 @@ const List<Map> platformItems = [
 ];
 
 const List<Map> skillItems = [
-  {"img": "assets/flutter.png", "title": "Flutter"},
-  {"img": "assets/dart.png", "title": "Dart"},
-  {"img": "assets/html5.png", "title": "HTML5"},
-  {"img": "assets/css3.png", "title": "CSS3"},
-  {"img": "assets/javascript.png", "title": "JS"},
-  {"img": "assets/hugo.png", "title": "Hugo"},
-  {"img": "assets/docker.png", "title": "Docker"},
-  {"img": "assets/python.png", "title": "Python"},
+  {"img": "assets/flutter.png", "title": "Flutter", "svg": false},
+  {"img": "assets/dart.png", "title": "Dart", "svg": false},
+  {"img": "assets/kotlin.svg", "title": "Kotlin", "svg": true},
+  {"img": "assets/jetpackcompose.svg", "title": "Jetpack Compose", "svg": true},
+  {"img": "assets/android.svg", "title": "Android", "svg": true},
+  {"img": "assets/git.svg", "title": "Git", "svg": true},
 ];
