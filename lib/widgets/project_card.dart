@@ -17,68 +17,123 @@ class ProjectCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      height: 290,
-      width: 260,
+      width: 280,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(14),
         color: CustomColor.bgLight2,
+        border: Border.all(
+          color: CustomColor.accentPurple.withValues(alpha: 0.2),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            project.image,
-            height: 140,
-            width: 260,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
-              height: 140,
-              width: 260,
-              color: CustomColor.bgLight1,
-              child: Center(
-                child: Icon(
-                  project.icon ?? Icons.flutter_dash,
-                  size: 64,
-                  color: project.iconColor ?? CustomColor.yellowSecondary,
+          // Image
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+            child: Image.asset(
+              project.image,
+              height: 150,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(
+                height: 150,
+                color: CustomColor.bgLight1,
+                child: Center(
+                  child: Icon(
+                    project.icon ?? Icons.flutter_dash,
+                    size: 64,
+                    color: project.iconColor ?? CustomColor.yellowSecondary,
+                  ),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(12, 15, 12, 12),
+            padding: const EdgeInsets.fromLTRB(14, 14, 14, 0),
             child: Text(
               project.title,
               style: const TextStyle(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
                 color: CustomColor.whitePrimary,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+            padding: const EdgeInsets.fromLTRB(14, 6, 14, 10),
             child: Text(
               project.subtitle,
-              style: const TextStyle(fontSize: 12, color: CustomColor.whiteSecondary),
+              style: const TextStyle(
+                fontSize: 12,
+                color: CustomColor.whiteSecondary,
+                height: 1.5,
+              ),
             ),
           ),
-          const Spacer(),
+          // Skills chips
+          if (project.skills.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+              child: Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: project.skills.map((skill) => Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: CustomColor.bgLight1,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: CustomColor.accentPurple.withValues(alpha: 0.5),
+                      width: 0.8,
+                    ),
+                  ),
+                  child: Text(
+                    skill,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: CustomColor.accentBlue,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                )).toList(),
+              ),
+            ),
+          // Footer
           Container(
-            color: CustomColor.bgLight1,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: CustomColor.bgLight1,
+              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(14)),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             child: Row(
               children: [
                 const Text(
-                  "Disponível em:",
-                  style: TextStyle(color: CustomColor.yellowSecondary, fontSize: 10),
+                  "Ver projeto",
+                  style: TextStyle(
+                    color: CustomColor.yellowSecondary,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const Spacer(),
                 if (project.webLink != null || project.previewUrl != null)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6),
-                    child: InkWell(
-                      onTap: () => _openWeb(context),
-                      child: Image.asset("assets/web_icon.png", width: 17),
+                  InkWell(
+                    onTap: () => _openWeb(context),
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: CustomColor.yellowSecondary.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.open_in_new_rounded,
+                        size: 16,
+                        color: CustomColor.yellowSecondary,
+                      ),
                     ),
                   ),
               ],
