@@ -46,16 +46,24 @@ class AboutSection extends StatelessWidget {
 
   Widget _avatar() {
     return Container(
-      width: 160,
-      height: 160,
+      width: 180,
+      height: 180,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(color: CustomColor.yellowSecondary, width: 3),
+        boxShadow: [
+          BoxShadow(
+            color: CustomColor.yellowSecondary.withValues(alpha: 0.3),
+            blurRadius: 24,
+            spreadRadius: 4,
+          ),
+        ],
       ),
       child: ClipOval(
         child: Image.asset(
-          'assets/avatar.png',
+          'assets/profile.jpg',
           fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
         ),
       ),
     );
