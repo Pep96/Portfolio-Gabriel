@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../constants/colors.dart';
 import '../constants/size.dart';
-import '../constants/sns_links.dart';
+import '../widgets/about_section.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/drawer_mobile.dart';
 import '../widgets/footer.dart';
@@ -24,7 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final scrollController = ScrollController();
-  final List<GlobalKey> navbarKeys = List.generate(4, (index) => GlobalKey());
+  final List<GlobalKey> navbarKeys = List.generate(5, (index) => GlobalKey());
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +84,8 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 30),
               ContactSection(key: navbarKeys[3]),
               const SizedBox(height: 30),
+              AboutSection(key: navbarKeys[4]),
+              const SizedBox(height: 30),
               const Footer(),
             ],
           ),
@@ -93,12 +94,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void scrollToSection(int navIndex) async {
-    if (navIndex == 4) {
-      final uri = Uri.parse(SnsLinks.blog);
-      if (await canLaunchUrl(uri)) launchUrl(uri);
-      return;
-    }
+  void scrollToSection(int navIndex) {
     final key = navbarKeys[navIndex];
     Scrollable.ensureVisible(
       key.currentContext!,
