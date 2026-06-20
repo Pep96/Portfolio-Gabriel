@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../constants/colors.dart';
 
 class AboutSection extends StatelessWidget {
@@ -26,7 +27,7 @@ class AboutSection extends StatelessWidget {
         const SizedBox(width: 60),
         Flexible(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
+            constraints: const BoxConstraints(maxWidth: 580),
             child: _content(),
           ),
         ),
@@ -73,35 +74,51 @@ class AboutSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Sobre mim",
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: CustomColor.yellowSecondary,
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [CustomColor.yellowPrimary, CustomColor.accentPurple],
+          ).createShader(bounds),
+          child: Text(
+            "Sobre mim",
+            style: GoogleFonts.poppins(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
-        const SizedBox(height: 16),
-        const Text(
-          "Sou Gabriel Pereira, desenvolvedor mobile com foco em Flutter e Android nativo. "
-          "Apaixonado por criar experiências fluidas e bem projetadas para dispositivos móveis, "
-          "com atenção especial à performance e à qualidade do código.",
-          style: TextStyle(
+        const SizedBox(height: 20),
+        Text(
+          "Transformo ideias em aplicativos que as pessoas realmente querem usar. "
+          "Sou desenvolvedor mobile especializado em Flutter e Android nativo, "
+          "entregando apps com interface polida, código limpo e performance que o usuário sente.",
+          style: GoogleFonts.poppins(
             fontSize: 15,
-            height: 1.8,
+            height: 1.9,
             color: CustomColor.whiteSecondary,
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
-          "Tenho experiência com Flutter, Dart, Kotlin, Jetpack Compose e Android nativo, "
-          "desenvolvendo aplicativos do zero com arquiteturas modernas como BLoC e Riverpod. "
-          "Gosto de resolver problemas reais e transformar ideias em produtos funcionais.",
-          style: TextStyle(
+        Text(
+          "Se você tem uma ideia de app e precisa de alguém que cuide do projeto do início "
+          "ao fim — arquitetura, design, publicação — eu sou essa pessoa. "
+          "Trabalho com Flutter, Kotlin e Jetpack Compose, e entrego o que foi combinado, "
+          "no prazo, sem enrolação.",
+          style: GoogleFonts.poppins(
             fontSize: 15,
-            height: 1.8,
+            height: 1.9,
             color: CustomColor.whiteSecondary,
           ),
+        ),
+        const SizedBox(height: 28),
+        Row(
+          children: [
+            _statCard("3+", "Apps\nEntregues"),
+            const SizedBox(width: 16),
+            _statCard("2+", "Anos de\nExperiência"),
+            const SizedBox(width: 16),
+            _statCard("100%", "Foco em\nMobile"),
+          ],
         ),
         const SizedBox(height: 24),
         Wrap(
@@ -109,11 +126,51 @@ class AboutSection extends StatelessWidget {
           runSpacing: 12,
           children: [
             _chip(Icons.place_rounded, "Amparo, SP"),
-            _chip(Icons.work_rounded, "Disponível para projetos"),
-            _chip(Icons.school_rounded, "Dev Mobile"),
+            _chip(Icons.check_circle_rounded, "Disponível agora"),
+            _chip(Icons.devices_rounded, "Flutter & Android"),
           ],
         ),
       ],
+    );
+  }
+
+  Widget _statCard(String value, String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      decoration: BoxDecoration(
+        color: CustomColor.bgLight2,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: CustomColor.yellowSecondary.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          ShaderMask(
+            shaderCallback: (bounds) => const LinearGradient(
+              colors: [CustomColor.yellowPrimary, CustomColor.accentPurple],
+            ).createShader(bounds),
+            child: Text(
+              value,
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              fontSize: 11,
+              color: CustomColor.whiteSecondary,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -131,7 +188,7 @@ class AboutSection extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             label,
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 13,
               color: CustomColor.whiteSecondary,
             ),
