@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants/colors.dart';
 
 class MainMobile extends StatelessWidget {
@@ -42,7 +43,12 @@ class MainMobile extends StatelessWidget {
           SizedBox(
             width: 190.0,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final uri = Uri.parse(
+                  'https://wa.me/5519999220499?text=Olá%20Gabriel%2C%20vi%20seu%20portfólio%20e%20gostaria%20de%20conversar!',
+                );
+                if (await canLaunchUrl(uri)) launchUrl(uri);
+              },
               child: const Text("Entre em contato"),
             ),
           ),
