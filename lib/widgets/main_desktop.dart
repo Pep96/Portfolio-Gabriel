@@ -73,7 +73,7 @@ class MainDesktop extends StatelessWidget {
                     );
                     if (await canLaunchUrl(uri)) launchUrl(uri);
                   },
-                  icon: const Icon(Icons.whatsapp, size: 20),
+                  icon: const Icon(Icons.chat_rounded, size: 20),
                   label: const Text("Entre em contato"),
                 ),
               ),
